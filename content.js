@@ -11,6 +11,7 @@ window.onload = () => {
 			changeElements();
 		}
 	}, 100);
+
 }
 
 function changeElements() {
@@ -34,6 +35,19 @@ function changeElements() {
 			}
 		}, 200);
 	} else {
+		let cnt = 0;
+		var si2 = setInterval(() => {
+			if (document.querySelector('[role="tablist"]') != null) {
+				clearInterval(si2);
+				var tablist = document.querySelector('[role="tablist"]');
+				Array.from(tablist.getElementsByTagName('span'))
+				.find(elm => elm.innerText == "いいね")
+				.innerText = "お気に入り";
+			}
+			if (cnt > 50)
+				clearInterval(si2);
+			cnt++;
+		}, 200);
 		var si = setInterval(() => {
 			var target = null;
 			if (document.querySelector('div[aria-label="タイムライン: ホームタイムライン"]') != null) {
@@ -44,7 +58,6 @@ function changeElements() {
 				target = document.querySelector('nav[aria-label="プロフィールタイムライン"]').nextElementSibling.querySelector('div').querySelector('div');
 			}
 			if (target != null) {
-				console.log(target);
 				clearInterval(si);
 				function delPro() {
 					var elms = document.getElementsByTagName("span");
