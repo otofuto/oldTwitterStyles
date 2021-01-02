@@ -1,0 +1,15 @@
+{
+  "name": "deletePromotion",
+  "version": "1.0.0",
+  "manifest_version": 2,
+  "description": "delete promotion tweet in timeline",
+  "content_scripts": [{
+    "matches": ["https://twitter.com/*"],
+    "js": [
+      "content.js"
+    ]
+  }],
+  "icons": {
+    "48": "icon.ico"
+  }
+}

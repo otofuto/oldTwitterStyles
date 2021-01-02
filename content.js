@@ -1,0 +1,68 @@
+window.onload = () => {
+	var lnk = document.createElement("link");
+	lnk.setAttribute("rel", "stylesheet");
+	lnk.setAttribute("href", "https://otft.info/css/twitter.css");
+	document.head.appendChild(lnk);
+	changeElements();
+	currentUrl = location.href;
+	setInterval(() => {
+		if (currentUrl != location.href) {
+			currentUrl = location.href;
+			changeElements();
+		}
+	}, 100);
+}
+
+function changeElements() {
+	console.log('changeElements');
+	if (location.href.indexOf("notifications") > 0) {
+		var si = setInterval(() => {
+			if (document.querySelector('div[aria-label="タイムライン: 通知"]') != null) {
+				clearInterval(si);
+				var target = document.querySelector('div[aria-label="タイムライン: 通知"]').querySelector('div');
+				function likeToFav() {
+					var elms = target.getElementsByTagName("span");
+					Array.from(elms)
+					.filter(elm => elm.innerText.endsWith("をいいねしました"))
+					.forEach(elm => {
+						elm.innerText = elm.innerText.replace("をいいねしました", "をお気に入りに追加しました");
+					});
+				}
+				var mo = new MutationObserver(likeToFav);
+				mo.observe(target, {childList: true});
+				likeToFav();
+			}
+		}, 200);
+	} else {
+		var si = setInterval(() => {
+			var target = null;
+			if (document.querySelector('div[aria-label="タイムライン: ホームタイムライン"]') != null) {
+				target = document.querySelector('div[aria-label="タイムライン: ホームタイムライン"]').querySelector('div');
+			} else if (document.querySelector('div[aria-label="タイムライン: 話題を検索"]') != null) {
+				target = document.querySelector('div[aria-label="タイムライン: 話題を検索"]').querySelector('div');
+			} else if (document.querySelector('nav[aria-label="プロフィールタイムライン"]') != null) {
+				target = document.querySelector('nav[aria-label="プロフィールタイムライン"]').nextElementSibling.querySelector('div').querySelector('div');
+			}
+			if (target != null) {
+				console.log(target);
+				clearInterval(si);
+				function delPro() {
+					var elms = document.getElementsByTagName("span");
+					Array.from(elms)
+					.filter(elm => elm.innerText.endsWith("によるプロモーション") || elm.innerText == "プロモーション")
+					.forEach(elm => {
+						var tweet = elm.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
+						var trend = elm.parentNode.parentNode.parentNode.parentNode.parentNode;
+						if (trend.getAttribute("data-testid") == "tweet") {
+							tweet.style.display = "none";
+							console.log("delete promotion");
+						}
+					});
+				}
+				var mo = new MutationObserver(delPro);
+				mo.observe(target, {childList: true});
+				delPro();
+			}
+		}, 200);
+	}
+}
