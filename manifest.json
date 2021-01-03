@@ -1,8 +1,8 @@
 {
-  "name": "deletePromotion",
+  "name": "oldTwitterStyles",
   "version": "1.0.0",
   "manifest_version": 2,
-  "description": "delete promotion tweet in timeline",
+  "description": "Change some CSS on Twitter Web Client to old style",
   "content_scripts": [{
     "matches": ["https://twitter.com/*"],
     "js": [
