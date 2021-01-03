@@ -34,6 +34,20 @@ function changeElements() {
 				likeToFav();
 			}
 		}, 200);
+	} else if (location.href.indexOf("/i/timeline") > 0) {
+		let cnt = 0;
+		var si = setInterval(() => {
+			if (document.querySelectorAll('h2[role="heading"]').length == 2) {
+				clearInterval(si);
+				var spn = document.querySelectorAll('h2[role="heading"]')[1].querySelector('span');
+				if (spn != null && spn.innerText == "いいねしました") {
+					spn.innerText = "お気に入りしました";
+				}
+			}
+			if (cnt > 50)
+				clearInterval(si);
+			cnt++;
+		});
 	} else {
 		let cnt = 0;
 		var si2 = setInterval(() => {
