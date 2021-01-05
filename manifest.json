@@ -1,6 +1,6 @@
 {
   "name": "oldTwitterStyles",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "manifest_version": 2,
   "description": "Change some CSS on Twitter Web Client to old style",
   "content_scripts": [{
@@ -11,5 +11,6 @@
   }],
   "icons": {
     "48": "icon.ico"
-  }
+  },
+  "permissions": []
 }

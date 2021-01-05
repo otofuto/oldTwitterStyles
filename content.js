@@ -1,7 +1,7 @@
 window.onload = () => {
 	var lnk = document.createElement("link");
 	lnk.setAttribute("rel", "stylesheet");
-	lnk.setAttribute("href", "https://otft.info/css/twitter.css");
+	lnk.setAttribute("href", "https://otft.info/css/twitter_dev.css");
 	document.head.appendChild(lnk);
 	changeElements();
 	currentUrl = location.href;
@@ -49,19 +49,6 @@ function changeElements() {
 			cnt++;
 		});
 	} else {
-		let cnt = 0;
-		var si2 = setInterval(() => {
-			if (document.querySelector('[role="tablist"]') != null) {
-				clearInterval(si2);
-				var tablist = document.querySelector('[role="tablist"]');
-				Array.from(tablist.getElementsByTagName('span'))
-				.find(elm => elm.innerText == "いいね")
-				.innerText = "お気に入り";
-			}
-			if (cnt > 50)
-				clearInterval(si2);
-			cnt++;
-		}, 200);
 		var si = setInterval(() => {
 			var target = null;
 			if (document.querySelector('div[aria-label="タイムライン: ホームタイムライン"]') != null) {
