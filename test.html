@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title></title>
+</head>
+<body>
+	<script>
+function isRome(username) {
+	let oklist = [
+		'nk', 'ns', 'nt', 'nh', 'nm', 'ny', 'nr', 'nw', 'ng', 'nz', 'nj', 'nd', 'nb', 'np', 'nf', 'nc',
+		'ka', 'ki', 'ku', 'ke', 'ko', 'ky',
+		'sa', 'si', 'su', 'se', 'so', 'sy', 'sh', 'st',
+		'ta', 'ti', 'tu', 'te', 'to', 'ty',
+		'na', 'ni', 'nu', 'ne', 'no', 'ny',
+		'ha', 'hi', 'hu', 'he', 'ho', 'hy',
+		'ma', 'mi', 'mu', 'me', 'mo', 'my',
+		'ya', 'yu', 'yo',
+		'ra', 'ri', 'ru', 're', 'ro', 'ry',
+		'wa', 'wo', 'nn',
+		'ga', 'gi', 'gu', 'ge', 'go', 'gy',
+		'za', 'zi', 'zu', 'ze', 'zo', 'zy',
+		'ja', 'ji', 'ju', 'je', 'jo',
+		'da', 'du', 'de', 'do',
+		'ba', 'bi', 'bu', 'be', 'bo', 'by',
+		'pa', 'pi', 'pu', 'pe', 'po', 'py',
+		'fa', 'fi', 'fu', 'fe', 'fo',
+		'kk', 'ss', 'tt',
+		'ch',
+	];
+	let skiplist = '\t\\\'\r\n".,/;:@_-=][{}|`*+?><!#$%&()';
+	let prev = '';
+	let wordblock = '';
+	let allOK = true;
+	for (let i = 0; i < username.length; i++) {
+		let c = username.charAt(i).toLowerCase();
+		if (c == ' ' || c == '　') {
+			console.log(wordblock);
+			if ('qwrtypsdfghjklzxcvbm'.indexOf(wordblock.charAt(wordblock.length - 1)) >= 0) {
+				allOK = false;
+				break;
+			}
+			wordblock = '';
+			prev = '';
+			continue;
+		}
+		if (skiplist.indexOf(c) >= 0) continue;
+		if (prev == '') {
+			prev = ('aiueo'.indexOf(c) >= 0 ? '' : c);
+			wordblock += c;
+			continue;
+		}
+		if (oklist.find(l => l == prev + c) == null) {
+			allOK = false;
+			console.error(prev + c, 'dame');
+			break;
+		}
+		console.log(prev + c);
+		prev = ('aiueo'.indexOf(c) >= 0 ? '' : c);
+		wordblock += c;
+	}
+	return allOK;
+}
+	</script>
+</body>
+</html>

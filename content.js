@@ -11,11 +11,16 @@ window.onload = () => {
 			changeElements();
 		}
 	}, 100);
-
 }
-
 function changeElements() {
 	console.log('changeElements');
+	if (document.querySelector('a.r-14lw9ot.r-1xce0ei img') != null) {
+		document.body.style.backgroundImage = "url('" + document.querySelector('a.r-14lw9ot.r-1xce0ei img').src + "')";
+		document.body.style.backgroundSize = '25%';
+	} else if (document.querySelector('div[data-testid="SideNav_AccountSwitcher_Button"] img') != null) {
+		document.body.style.backgroundImage = "url('" + document.querySelector('div[data-testid="SideNav_AccountSwitcher_Button"] img').src.replace('x96', '400x400') + "')";
+		document.body.style.backgroundSize = '25%';
+	}
 	if (location.href.indexOf("notifications") > 0) {
 		var si = setInterval(() => {
 			if (document.querySelector('div[aria-label="タイムライン: 通知"]') != null) {
