@@ -66,16 +66,9 @@ function changeElements() {
 			if (target != null) {
 				clearInterval(si);
 				function delPro() {
-					var elms = document.getElementsByTagName("span");
-					Array.from(elms)
-					.filter(elm => elm.innerText.endsWith("によるプロモーション") || elm.innerText == "プロモーション")
+					Array.from(document.querySelectorAll('[data-testid="placementTracking"]'))
 					.forEach(elm => {
-						var tweet = elm.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode.parentNode;
-						var trend = elm.parentNode.parentNode.parentNode.parentNode.parentNode;
-						if (trend.getAttribute("data-testid") == "tweet") {
-							tweet.style.display = "none";
-							console.log("delete promotion");
-						}
+						elm.parentNode.parentNode.style.display = 'none';
 					});
 				}
 				var mo = new MutationObserver(delPro);
